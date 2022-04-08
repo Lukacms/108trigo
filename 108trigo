@@ -1,0 +1,28 @@
+#!/usr/bin/env python3
+
+from src.parse_args import parse_args, Arguments
+from src.create_matrix import create_matrix
+from src.functions.exponential import positive_exponential
+from src.functions.calculate_cos import calculate_cos, calculate_cosh
+from src.functions.calculate_sin import calculate_sin, calculate_sinh
+from src.display import display_result
+
+FUNCTIONS = {
+    "EXP": positive_exponential,
+    "COS": calculate_cos,
+    "SIN": calculate_sin,
+    "COSH": calculate_cosh,
+    "SINH": calculate_sinh
+}
+
+
+def main() -> int:
+    args: Arguments = parse_args()
+
+    matrix: list[list[float]] = create_matrix(args)
+    result: list[list[float]] = FUNCTIONS[args.fun](matrix)
+    display_result(result)
+    return 0
+
+if __name__ == "__main__":
+    exit(main())
